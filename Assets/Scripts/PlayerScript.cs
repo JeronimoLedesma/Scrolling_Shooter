@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Shoot")]
     [SerializeField] GameObject bulletSpawner;
-    [SerializeField] GameObject bullet;
+    [SerializeField] GameObject playerBullet;
 
     [Header("Life")]
     [SerializeField] float life;
@@ -44,7 +44,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (context.performed)
         {
-            //Logica de disparo
+            GameObject bullet = (GameObject)Instantiate(playerBullet);
+            bullet.transform.position = bulletSpawner.transform.position;
         }
     }
     
