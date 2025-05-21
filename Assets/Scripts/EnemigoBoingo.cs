@@ -41,4 +41,15 @@ public class EnemigoBoingo : Enemy
             transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
         }
     }
+
+    public override void RecibirDaño(float daño)
+    {
+        Debug.Log("golpe");
+        life -= daño;
+        if (life <= 0)
+        {
+            //particulas
+            Destroy(gameObject);
+        }
+    }
 }

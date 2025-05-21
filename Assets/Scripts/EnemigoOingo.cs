@@ -15,4 +15,15 @@ public class EnemigoOingo : Enemy
             Destroy(gameObject);
         }
     }
+
+    public override void RecibirDaño(float daño)
+    {
+        Debug.Log("golpe");
+        life -= daño;
+        if (life <= 0)
+        {
+            //particulas
+            Destroy(gameObject);
+        }
+    }
 }

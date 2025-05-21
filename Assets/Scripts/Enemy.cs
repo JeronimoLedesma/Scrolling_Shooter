@@ -9,15 +9,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float limity;
 
     public abstract void Moverse();
-    public void RecibirDaño(float daño)
-    {
-        life -= daño;
-        if (life <= 0)
-        {
-            //particulas
-            Destroy(gameObject);
-        }
-    }
+    public abstract void RecibirDaño(float daño);
 
 
 }

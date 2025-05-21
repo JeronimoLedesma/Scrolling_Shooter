@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -56,5 +58,29 @@ public class PlayerScript : MonoBehaviour
         pos.x = Mathf.Clamp(pos.x, -limitx, limitx);
         pos.y = Mathf.Clamp(pos.y, -limity, limity);
         transform.position = pos;
+    }
+
+    public void RecibirDaño(float daño)
+    {
+        if (!beingHit)
+        {
+            life -= daño;
+            if (life <= 0)
+            {
+                //particulas
+                //end game
+                Debug.Log("Me mori");
+            }
+            StartCoroutine(hitStun());
+        }
+
+        
+    }
+
+    IEnumerator hitStun()
+    {
+        beingHit = true;
+        yield return new WaitForSeconds(stun);
+        beingHit = false;
     }
 }

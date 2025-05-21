@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f511e63651deeb498afeed8383373d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 7
   limitx: 10
   limity: 5
   bulletSpawner: {fileID: 776551338}

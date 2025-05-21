@@ -4,6 +4,7 @@ public class BulletBehaviour : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] float maxy;
+    [SerializeField] float daño;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +18,15 @@ public class BulletBehaviour : MonoBehaviour
 
         if (transform.position.y > maxy)
         {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.GetComponent<Enemy>() != null)
+        {
+            collision.collider.GetComponent<Enemy>().RecibirDaño(daño);
             Destroy(gameObject);
         }
     }

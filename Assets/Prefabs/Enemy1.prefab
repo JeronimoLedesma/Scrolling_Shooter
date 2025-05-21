@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletEnemy: {fileID: 661636489652414006, guid: fdccb26ce5d177b4abf922f33f1e643b, type: 3}
-  time: 1
+  time: 3
 --- !u!1 &8773045147033785426
 GameObject:
   m_ObjectHideFlags: 0

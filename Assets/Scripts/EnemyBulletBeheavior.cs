@@ -7,6 +7,7 @@ public class EnemyBulletBeheavior : MonoBehaviour
     bool preparado;
     [SerializeField] float maxX;
     [SerializeField] float maxY;
+    [SerializeField] float daño;
     
     private void Awake()
     {
@@ -32,5 +33,13 @@ public class EnemyBulletBeheavior : MonoBehaviour
     {
         direccion = direction.normalized;
         preparado = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.GetComponent<PlayerScript>() != null)
+        {
+            collision.collider.GetComponent<PlayerScript>().RecibirDaño(daño);
+        }
     }
 }
