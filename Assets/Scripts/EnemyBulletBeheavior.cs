@@ -40,6 +40,7 @@ public class EnemyBulletBeheavior : MonoBehaviour
         if (collision.collider.GetComponent<PlayerScript>() != null)
         {
             collision.collider.GetComponent<PlayerScript>().RecibirDaño(daño);
+            Destroy(gameObject);
         }
     }
 }
