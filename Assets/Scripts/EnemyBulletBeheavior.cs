@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class EnemyBulletBeheavior : MonoBehaviour
 {
@@ -7,7 +8,9 @@ public class EnemyBulletBeheavior : MonoBehaviour
     bool preparado;
     [SerializeField] float maxX;
     [SerializeField] float maxY;
-    [SerializeField] float daño;
+    [SerializeField] public float daño;
+    [SerializeField] VisualEffect spark;
+    [SerializeField] float vfxTime;
     
     private void Awake()
     {
@@ -35,12 +38,9 @@ public class EnemyBulletBeheavior : MonoBehaviour
         preparado = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void vfxPlay()
     {
-        if (collision.collider.GetComponent<PlayerScript>() != null)
-        {
-            collision.collider.GetComponent<PlayerScript>().RecibirDaño(daño);
-            Destroy(gameObject);
-        }
+        VisualEffect vfx = Instantiate(spark, transform.position, Quaternion.identity);
+        Destroy(vfx.gameObject, vfxTime);
     }
 }

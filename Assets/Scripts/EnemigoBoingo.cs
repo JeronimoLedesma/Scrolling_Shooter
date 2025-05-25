@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class EnemigoBoingo : Enemy
 {
@@ -48,7 +49,10 @@ public class EnemigoBoingo : Enemy
         life -= daño;
         if (life <= 0)
         {
-            //particulas
+            GameObject droppin = (GameObject)Instantiate(drop);
+            droppin.transform.position = gameObject.transform.position;
+            VisualEffect vfx = Instantiate(boom, transform);
+            Destroy(vfx, boomTime);
             Destroy(gameObject);
         }
     }

@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class BulletBehaviour : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] float maxy;
     [SerializeField] float daño;
+    [SerializeField] VisualEffect spark;
+    [SerializeField] float vfxTime;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +29,8 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (collision.collider.GetComponent<Enemy>() != null)
         {
+            VisualEffect vfx = Instantiate(spark, transform.position, Quaternion.identity);
+            Destroy(vfx.gameObject, vfxTime);
             collision.collider.GetComponent<Enemy>().RecibirDaño(daño);
             Destroy(gameObject);
         }

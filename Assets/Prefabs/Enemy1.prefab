@@ -172,6 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 200
   speed: 4
-  drop: {fileID: 0}
+  drop: {fileID: 8476435213208278606, guid: 5a69dd5922cff8546be7fc9fa6d84959, type: 3}
   limitx: 10
   limity: 5
+  boom: {fileID: 5646341303476645318, guid: 092f48c797db9914989978166597527e, type: 3}
+  boomTime: 3

@@ -2,7 +2,9 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -21,6 +23,10 @@ public class PlayerScript : MonoBehaviour
     bool beingHit;
     [SerializeField] float stun;
     [SerializeField] Slider healthBar;
+
+    [Header("Explode")]
+    [SerializeField] VisualEffect boom;
+    [SerializeField] float boomTime;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,7 +36,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        healthBar.value = life;
     }
     private void FixedUpdate()
     {
@@ -60,27 +66,31 @@ public class PlayerScript : MonoBehaviour
         transform.position = pos;
     }
 
-    public void RecibirDaño(float daño)
-    {
-        if (!beingHit)
-        {
-            life -= daño;
-            if (life <= 0)
-            {
-                //particulas
-                //end game
-                Debug.Log("Me mori");
-            }
-            StartCoroutine(hitStun());
-        }
-
-        
-    }
-
     IEnumerator hitStun()
     {
         beingHit = true;
         yield return new WaitForSeconds(stun);
         beingHit = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.GetComponent<EnemyBulletBeheavior>() != null)
+        {
+            if (!beingHit)
+            {
+                life -= collision.collider.GetComponent<EnemyBulletBeheavior>().daño;
+                collision.collider.GetComponent<EnemyBulletBeheavior>().vfxPlay();
+                if (life < 0)
+                {
+                    VisualEffect vfx = Instantiate(boom, transform);
+                    Destroy(vfx.gameObject, boomTime);
+                    SceneManager.LoadScene(2);
+                }
+                Destroy(collision.gameObject);
+                StartCoroutine(hitStun());
+            }
+        }
+        
     }
 }
